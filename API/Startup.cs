@@ -40,6 +40,8 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
+            //Allow permission for cors
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +58,9 @@ namespace API
 
             //Zorgen dat de routes werken naar verschillende endpoints
             app.UseRouting();
+
+            //Zorg url toegang krijgt CORS 
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthorization();
 
